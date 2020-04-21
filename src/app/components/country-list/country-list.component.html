@@ -1,4 +1,11 @@
-<h3>Select a country:</h3>
-<div *ngFor="let c of countrys">
-    {{c.countryId}} - {{c.countryName}}
+<div class="form-group select-wrapper">
+
+    <label for="countryFormControl">Select a country: </label>
+    
+    <select id="countryFormControl" class="form-control" (change)="onChange()" [(ngModel)]="SelectedCountryId" >
+        <option *ngFor="let country of countrys" value={{country.countryId}} >
+            {{country.countryName}}
+        </option>
+    </select>
+
 </div>

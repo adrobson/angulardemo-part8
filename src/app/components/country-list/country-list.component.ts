@@ -10,8 +10,11 @@ import { FinancialsService } from 'src/app/services/financials.service';
 export class CountryListComponent implements OnInit {
 
   countrys:Country[];
+  SelectedCountryId:number;
 
-  constructor(private financialsService:FinancialsService) { }
+  constructor(private financialsService:FinancialsService) {
+    //this.SelectedCountryId = 3;
+   }
 
   ngOnInit(): void {
     this.financialsService.getCountrys().subscribe(x => {
@@ -19,4 +22,8 @@ export class CountryListComponent implements OnInit {
     });
  }
 
+ onChange(){
+
+  //here is where we can call out to other services to use the value selected       
+}
 }

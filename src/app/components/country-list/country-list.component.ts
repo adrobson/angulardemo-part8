@@ -14,16 +14,16 @@ export class CountryListComponent implements OnInit {
 
   constructor(private financialsService:FinancialsService) {
     //this.SelectedCountryId = 3;
-   }
+  }
 
   ngOnInit(): void {
     this.financialsService.getCountrys().subscribe(x => {
-      this.countrys = x.countrys;
-    });
- }
+      this.countrys = x;
+      });
+  }
 
- onChange(){
+  onChange(){
 
-  //here is where we can call out to other services to use the value selected       
-}
+  this.financialsService.selectCountry(this.SelectedCountryId);   
+  }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Fund } from 'src/app/data/model';
+import { FinancialsService } from 'src/app/services/financials.service';
 
 @Component({
   selector: 'app-fund-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FundListComponent implements OnInit {
 
-  constructor() { }
+  funds:Fund[];
+
+  constructor(private financialsService:FinancialsService) {
+    financialsService.selectedCountry.subscribe(x => {
+      this.getData(x);
+    });
+   }
 
   ngOnInit(): void {
+  }
+
+  getData(countryId:number){
+    this.financialsService.getFunds(countryId).subscribe(x => this.funds = x);
   }
 
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Country } from 'src/app/data/model';
 import { FinancialsService } from 'src/app/services/financials.service';
+import { Store, Select } from '@ngxs/store';
+import { GetCountrys } from 'src/app/store/actions/get-countrys.actions';
+import { Observable } from 'rxjs';
+import { SelectCountry } from 'src/app/store/actions/select-country.actions';
 
 @Component({
   selector: 'app-country-list',
@@ -11,19 +15,20 @@ export class CountryListComponent implements OnInit {
 
   countrys:Country[];
   SelectedCountryId:number;
+  @Select(state => state.financials.countryList) countryList$: Observable<Country[]>;
 
-  constructor(private financialsService:FinancialsService) {
-    //this.SelectedCountryId = 3;
+  constructor(private store:Store) {
+    this.store.dispatch(new GetCountrys());
   }
 
   ngOnInit(): void {
-    this.financialsService.getCountrys().subscribe(x => {
-      this.countrys = x;
-      });
+    this.countryList$.subscribe(x =>
+    {  
+      this.countrys = x;  
+    });
   }
 
   onChange(){
-
-  this.financialsService.selectCountry(this.SelectedCountryId);   
+    this.store.dispatch(new SelectCountry(this.SelectedCountryId));
   }
 }

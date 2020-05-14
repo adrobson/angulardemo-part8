@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+
+import { NgModule } from '@angular/core';
+import { NgxsModule } from '@ngxs/store';﻿
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +13,7 @@ import { StocksHomeComponent } from './components/stocks-home/stocks-home.compon
 import { CountryListComponent } from './components/country-list/country-list.component';
 import { StockListComponent } from './components/stock-list/stock-list.component';
 import { FundListComponent } from './components/fund-list/fund-list.component';
+import { FinancialsState } from './store/state/financials.state';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { FundListComponent } from './components/fund-list/fund-list.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxsModule.forRoot([FinancialsState])
   ],
   providers: [],
   bootstrap: [AppComponent]

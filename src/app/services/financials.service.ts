@@ -14,16 +14,10 @@ export class FinancialsService {
   stockUrl = environment.apiUrl + "stock?countryId=";
   fundUrl = environment.apiUrl + "fund?countryId=";
 
-  selectedCountry = new Subject<number>();
-
   constructor(private httpClient:HttpClient) { }
 
   getCountrys():Observable<Country[]>{
     return this.httpClient.get<Country[]>(this.countryUrl);
-  }
-
-  selectCountry(countryId:number){
-    this.selectedCountry.next(countryId);
   }
 
   getStocks(countryId:number):Observable<Stock[]>{
